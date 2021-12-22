@@ -40,10 +40,11 @@ class NewCustConsumer:
             self.ledger[message['custid']] = message
             # add message to the transaction table in your SQL usinf SQLalchemy
 
-            if self.cursor.execute(f"select exists(select 1 from customer where custid={message['custid']});")==None:
-                self.cursor.execute("insert into customer (custid,fname,lname,createdate) values(%s, %s, %s, %s);", (message['custid'], message['fname'],message['lname'],message['createdate']))
-                print(f"new customer with id# {message['custid']} has been added")
-            elif self.cursor.execute(f"select count(custid) from customer where custid={message['custid']};")!=0:
+            try:
+                if self.cursor.execute(f"select exists(select 1 from customer where custid={message['custid']});")==None:
+                    self.cursor.execute("insert into customer (custid,fname,lname,createdate) values(%s, %s, %s, %s);", (message['custid'], message['fname'],message['lname'],message['createdate']))
+                    print(f"new customer with id# {message['custid']} has been added")
+            except:    
                 print(f"customer with id# {message['custid']} already exists")
             self.conn.commit()    
 
