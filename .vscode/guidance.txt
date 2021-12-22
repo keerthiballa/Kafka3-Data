@@ -1,0 +1,8 @@
+some simple unix shell stuff that may make the rest of kafka lab more pleasant for yous
+you can make a file executable with the command chmod
+so in folder with .py files chmod a+x *.py makes all files ending in .py executable
+the a+x means for  (a)ll users add(+) e(x)ecutable permission
+so then ./consumer-to-SQL.py will run the file
+you will also need to add #!python3 as the first line of the file 
+the #! (called a hashbang) tells the shell what program to use to run the script. if you had a file that needed to be run with bash you would for example put #!/bin/bash as the first line and make it executable
+this allows you to use text files as programs on the computer and saves you from for example running the file like so: python3 ./consumer-to-SQL.py
