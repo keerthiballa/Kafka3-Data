@@ -38,7 +38,7 @@ class ProducerB:
             self.conn = psycopg2.connect(database='zipbank', user='zipbankuser2', password='zipbankuserpassword', host='localhost', port='5432')
             self.cursor=self.conn.cursor()
 
-            self.cursor.execute("create table if not exists customer (custid int not null primary key, fname varchar(250) not null, lname varchar (250) not null, date int);")
+            self.cursor.execute("create table if not exists customer (custid int not null primary key, fname varchar(250) not null, lname varchar (250) not null, createdate int);")
         
             self.conn.commit()
 

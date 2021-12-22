@@ -42,11 +42,10 @@ class NewCustConsumer:
 
             if self.cursor.execute(f"select exists(select 1 from customer where custid={message['custid']});")==None:
                 self.cursor.execute("insert into customer (custid,fname,lname,createdate) values(%s, %s, %s, %s);", (message['custid'], message['fname'],message['lname'],message['createdate']))
-                self.conn.commit()
                 print(f"new customer with id# {message['custid']} has been added")
             elif self.cursor.execute(f"select count(custid) from customer where custid={message['custid']};")!=0:
                 print(f"customer with id# {message['custid']} already exists")
-                
+            self.conn.commit()    
 
 if __name__ == "__main__":
     c = NewCustConsumer()
